@@ -122,7 +122,7 @@ CREATE TABLE aspnet_Applications (
 	CONSTRAINT UQ__aspnet_Applicati__627A95E8 UNIQUE (LoweredApplicationName),
 	CONSTRAINT UQ__aspnet_Applicati__636EBA21 UNIQUE (ApplicationName)
 );
- CREATE CLUSTERED INDEX aspnet_Applications_Index ON dbo.aspnet_Applications (  LoweredApplicationName ASC  )  
+ CREATE CLUSTERED INDEX aspnet_Applications_Index ON dbo.aspnet_Applications (  LoweredApplicationName ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -532,7 +532,7 @@ CREATE TABLE aspnet_Paths (
 	CONSTRAINT PK__aspnet_Paths__2818EA29 PRIMARY KEY (PathId),
 	CONSTRAINT FK__aspnet_Pa__Appli__290D0E62 FOREIGN KEY (ApplicationId) REFERENCES aspnet_Applications(ApplicationId)
 );
- CREATE  UNIQUE CLUSTERED INDEX aspnet_Paths_index ON dbo.aspnet_Paths (  ApplicationId ASC  , LoweredPath ASC  )  
+ CREATE  UNIQUE CLUSTERED INDEX aspnet_Paths_index ON dbo.aspnet_Paths (  ApplicationId ASC  , LoweredPath ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -567,7 +567,7 @@ CREATE TABLE aspnet_Roles (
 	CONSTRAINT PK__aspnet_Roles__150615B5 PRIMARY KEY (RoleId),
 	CONSTRAINT FK__aspnet_Ro__Appli__15FA39EE FOREIGN KEY (ApplicationId) REFERENCES aspnet_Applications(ApplicationId)
 );
- CREATE  UNIQUE CLUSTERED INDEX aspnet_Roles_index1 ON dbo.aspnet_Roles (  ApplicationId ASC  , LoweredRoleName ASC  )  
+ CREATE  UNIQUE CLUSTERED INDEX aspnet_Roles_index1 ON dbo.aspnet_Roles (  ApplicationId ASC  , LoweredRoleName ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -589,10 +589,10 @@ CREATE TABLE aspnet_Users (
 	CONSTRAINT PK__aspnet_Users__664B26CC PRIMARY KEY (UserId),
 	CONSTRAINT FK__aspnet_Us__Appli__673F4B05 FOREIGN KEY (ApplicationId) REFERENCES aspnet_Applications(ApplicationId)
 );
- CREATE  UNIQUE CLUSTERED INDEX aspnet_Users_Index ON dbo.aspnet_Users (  ApplicationId ASC  , LoweredUserName ASC  )  
+ CREATE  UNIQUE CLUSTERED INDEX aspnet_Users_Index ON dbo.aspnet_Users (  ApplicationId ASC  , LoweredUserName ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
- CREATE NONCLUSTERED INDEX aspnet_Users_Index2 ON dbo.aspnet_Users (  ApplicationId ASC  , LastActivityDate ASC  )  
+ CREATE NONCLUSTERED INDEX aspnet_Users_Index2 ON dbo.aspnet_Users (  ApplicationId ASC  , LastActivityDate ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -610,7 +610,7 @@ CREATE TABLE aspnet_UsersInRoles (
 	CONSTRAINT FK__aspnet_Us__RoleI__1ABEEF0B FOREIGN KEY (RoleId) REFERENCES aspnet_Roles(RoleId),
 	CONSTRAINT FK__aspnet_Us__UserI__19CACAD2 FOREIGN KEY (UserId) REFERENCES aspnet_Users(UserId)
 );
- CREATE NONCLUSTERED INDEX aspnet_UsersInRoles_index ON dbo.aspnet_UsersInRoles (  RoleId ASC  )  
+ CREATE NONCLUSTERED INDEX aspnet_UsersInRoles_index ON dbo.aspnet_UsersInRoles (  RoleId ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -856,7 +856,7 @@ CREATE TABLE aspnet_Membership (
 	CONSTRAINT FK__aspnet_Me__Appli__7775B2CE FOREIGN KEY (ApplicationId) REFERENCES aspnet_Applications(ApplicationId),
 	CONSTRAINT FK__aspnet_Me__UserI__7869D707 FOREIGN KEY (UserId) REFERENCES aspnet_Users(UserId)
 );
- CREATE CLUSTERED INDEX aspnet_Membership_index ON dbo.aspnet_Membership (  ApplicationId ASC  , LoweredEmail ASC  )  
+ CREATE CLUSTERED INDEX aspnet_Membership_index ON dbo.aspnet_Membership (  ApplicationId ASC  , LoweredEmail ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
@@ -877,10 +877,10 @@ CREATE TABLE aspnet_PersonalizationPerUser (
 	CONSTRAINT FK__aspnet_Pe__PathI__3296789C FOREIGN KEY (PathId) REFERENCES aspnet_Paths(PathId),
 	CONSTRAINT FK__aspnet_Pe__UserI__338A9CD5 FOREIGN KEY (UserId) REFERENCES aspnet_Users(UserId)
 );
- CREATE  UNIQUE CLUSTERED INDEX aspnet_PersonalizationPerUser_index1 ON dbo.aspnet_PersonalizationPerUser (  PathId ASC  , UserId ASC  )  
+ CREATE  UNIQUE CLUSTERED INDEX aspnet_PersonalizationPerUser_index1 ON dbo.aspnet_PersonalizationPerUser (  PathId ASC  , UserId ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
- CREATE  UNIQUE NONCLUSTERED INDEX aspnet_PersonalizationPerUser_ncindex2 ON dbo.aspnet_PersonalizationPerUser (  UserId ASC  , PathId ASC  )  
+ CREATE  UNIQUE NONCLUSTERED INDEX aspnet_PersonalizationPerUser_ncindex2 ON dbo.aspnet_PersonalizationPerUser (  UserId ASC  , PathId ASC  )
 	 WITH (  PAD_INDEX = OFF ,FILLFACTOR = 100  ,SORT_IN_TEMPDB = OFF , IGNORE_DUP_KEY = OFF , STATISTICS_NORECOMPUTE = OFF , ONLINE = OFF , ALLOW_ROW_LOCKS = ON , ALLOW_PAGE_LOCKS = ON  )
 	 ON [PRIMARY ] ;
 
