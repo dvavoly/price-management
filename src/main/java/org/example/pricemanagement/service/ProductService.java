@@ -17,6 +17,9 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ProductService {
+  private static final String VENDOR_DESCRIPTION = "vendor_description";
+  private static final String PN_CODE = "pn_code";
+  private static final String FILE_NAME = "onix_pm";
   private final ProductRepository productRepository;
 
   public ProductService(ProductRepository productRepository) {
@@ -36,33 +39,38 @@ public class ProductService {
     List<Product> priceList = productRepository.findAllById(productIdList);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     try (Workbook wbOut = new XSSFWorkbook()) {
-      Sheet sheetOut = wbOut.createSheet("onix_pm");
-      Row row = sheetOut.createRow(0);
-      row.createCell(0).setCellValue("pn_code");
-      row.createCell(1).setCellValue("vendor_description");
-      row.createCell(2).setCellValue("price_fob");
-      // row.createCell(3).setCellValue("price_cost");
-      // row.createCell(4).setCellValue("price_1");
-      // row.createCell(5).setCellValue("price_4");
-      // row.createCell(6).setCellValue("price_2");
-      // row.createCell(7).setCellValue("price_3");
-      // row.createCell(8).setCellValue("price_5");
-
-      int index = 1;
-      for (Product item : priceList) {
-        row = sheetOut.createRow(index++);
-        row.createCell(0).setCellValue(item.getPnCode());
-        row.createCell(1).setCellValue(item.getVendorDescription());
-        row.createCell(2).setCellValue(item.getPriceFob());
-      }
-      sheetOut.autoSizeColumn(0);
-      sheetOut.autoSizeColumn(1);
+      populateExcelFile(priceList, wbOut);
       wbOut.write(out);
-
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return new ByteArrayInputStream(out.toByteArray());
+  }
+
+  private void populateExcelFile(List<Product> priceList, Workbook wbOut) {
+    Sheet sheetOut = wbOut.createSheet(FILE_NAME);
+    Row row = sheetOut.createRow(0);
+    row.createCell(0).setCellValue(PN_CODE);
+    row.createCell(1).setCellValue(VENDOR_DESCRIPTION);
+    row.createCell(2).setCellValue("price_fob");
+    row.createCell(2).setCellValue("");
+    row.createCell(2).setCellValue("");
+    // row.createCell(3).setCellValue("price_cost");
+    // row.createCell(4).setCellValue("price_1");
+    // row.createCell(5).setCellValue("price_4");
+    // row.createCell(6).setCellValue("price_2");
+    // row.createCell(7).setCellValue("price_3");
+    // row.createCell(8).setCellValue("price_5");
+
+    int index = 1;
+
+    for (Product item : priceList) {
+      row = sheetOut.createRow(index++);
+      row.createCell(0).setCellValue(item.getPnCode());
+      row.createCell(1).setCellValue(item.getVendorDescription());
+      row.createCell(2).setCellValue(item.getPriceFob());
+    }
+    sheetOut.autoSizeColumn(0);
+    sheetOut.autoSizeColumn(1);
   }
 }
